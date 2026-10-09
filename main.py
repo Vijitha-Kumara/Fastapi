@@ -49,3 +49,14 @@ def get_product_by_id(id: int):
 def add_product(product: Product):
     products.append(product)
     return product
+
+
+@app.put("/product/{id}")
+def update_product(id: int, product: Product):
+    for i in range(len(products)):
+        if products[i].id == id:
+            products[i] = product
+            return "Product updated successfully"
+
+    return "Product not found"
+
