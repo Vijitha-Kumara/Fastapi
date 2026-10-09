@@ -31,10 +31,21 @@ products = [
             price=95000, quantity=7)
 ]
 
+
 @app.get("/products")
 def get_all_products():
     return products
 
+
 @app.get("/product/{id}")
 def get_product_by_id(id: int):
-    return products[id-1]
+    for product in products:
+        if product.id == id:
+            return product
+    return 'Product not found'
+
+
+@app.post("/product")
+def add_product(product: Product):
+    products.append(product)
+    return product
